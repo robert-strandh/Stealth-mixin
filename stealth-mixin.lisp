@@ -55,7 +55,7 @@ of 'victim-class'."
              (dolist (k (class-stealth-mixins name))
                (pushnew k direct-superclasses
                         :test #'class-equalp))
-             (apply #'call-next-method class name 
+             (apply #'call-next-method class name
                     :direct-superclasses direct-superclasses
                     arguments))
             (t
