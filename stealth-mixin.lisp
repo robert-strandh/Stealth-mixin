@@ -1,21 +1,21 @@
 (cl:in-package :stealth-mixin)
 
-;;; The following hack is due to Gilbert Baumann.  It allows us to
-;;; dynamically mix in classes into a class without the latter being
-;;; aware of it.  
+;;;; The following hack is due to Gilbert Baumann.  It allows us to
+;;;; dynamically mix in classes into a class without the latter being
+;;;; aware of it.
 
-;; First of all we need to keep track of added mixins, we use a hash
-;; table here. Better would be to stick this information to the victim
-;; class itself.
+;;; First of all we need to keep track of added mixins, we use a hash
+;;; table here. Better would be to stick this information to the
+;;; victim class itself.
 
 (defvar *stealth-mixins* (make-hash-table))
 
 (defmacro class-stealth-mixins (class)
   `(gethash ,class *stealth-mixins*))
 
-;; The 'direct-superclasses' argument to ensure-class is a list of
-;; either classes or their names. Since we want to avoid duplicates,
-;; we need an appropriate equivalence predicate:
+;;; The 'direct-superclasses' argument to ensure-class is a list of
+;;; either classes or their names. Since we want to avoid duplicates,
+;;; we need an appropriate equivalence predicate:
 
 (defun class-equalp (c1 c2)
   (when (symbolp c1) (setf c1 (find-class c1)))
