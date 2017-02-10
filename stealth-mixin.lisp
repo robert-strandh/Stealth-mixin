@@ -23,7 +23,7 @@
   (eq c1 c2))
 
 (defmacro define-stealth-mixin (name super-classes victim-class
-				&rest for-defclass)
+                                &rest for-defclass)
   "Like DEFCLASS but adds the newly defined class to the super classes
 of 'victim-class'."
   `(progn
@@ -36,7 +36,7 @@ of 'victim-class'."
      :direct-superclasses (adjoin ',name
                                   (and (find-class ',victim-class nil)
                                        (closer-mop:class-direct-superclasses
-					(find-class ',victim-class)))
+                                        (find-class ',victim-class)))
                                   :test #'class-equalp))
 
     ;; Register it as a new mixin for the victim class
