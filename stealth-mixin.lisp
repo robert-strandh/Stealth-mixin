@@ -37,7 +37,8 @@ of 'victim-class'."
                                   (and (find-class ',victim-class nil)
                                        (closer-mop:class-direct-superclasses
                                         (find-class ',victim-class)))
-                                  :test #'class-equalp))
+                                  :test #'class-equalp)
+     :metaclass (class-of (find-class ',victim-class)))
 
     ;; Register it as a new mixin for the victim class
     (pushnew ',name (class-stealth-mixins ',victim-class))
